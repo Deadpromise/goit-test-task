@@ -1,7 +1,6 @@
 import GlobalStyles from 'common-styles/GlobalStyles';
 import { CardsGallery } from '../components/CardsGallery/CardsGallery';
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
 import { getUsers } from 'utils/api';
 import { LoadMoreBtn } from 'components/LoadMoreBtn/LoadMoreBtn';
 import { BackLink } from 'components/BackLink/BackLink';
@@ -39,12 +38,13 @@ const Tweets = () => {
       setStatus(Status.RESOLVED);
     });
   }, [page]);
+
   const resolved = status === 'resolved';
+
   return (
     <>
       <GlobalStyles />
       <BackLink to="/"></BackLink>
-      {/* <Link to="/">Back</Link> */}
       <CardsGallery results={results}></CardsGallery>
       {resolved && (
         <LoadMoreBtn type="button" onClick={onLoadMore}></LoadMoreBtn>

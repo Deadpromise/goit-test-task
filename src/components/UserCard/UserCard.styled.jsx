@@ -4,7 +4,6 @@ export const Card = styled.div`
   position: relative;
   display: flex;
   flex-direction: column;
-  /* justify-content: center; */
   align-items: center;
   width: 380px;
   height: 460px;
@@ -29,7 +28,6 @@ export const BubleImg = styled.img`
   height: 168px;
   margin-top: 28px;
 `;
-
 export const AvatarCont = styled.div`
   position: absolute;
   display: flex;
@@ -52,7 +50,6 @@ export const AvatarLine = styled.img`
   width: 380px;
   height: 16px;
 `;
-
 export const AvatarOutline = styled.img`
   position: absolute;
   width: 80px;
