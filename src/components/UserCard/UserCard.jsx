@@ -17,15 +17,45 @@ export const UserCard = ({ id, tweets, followers, avatar }) => {
     }
   }, [id]);
 
+  //   useEffect(() => {
+  //     const updateFollowers = async () => {
+  //       const newFollowers = following ? followers - 1 : followers + 1;
+  //       const res = await updateUserFollowers(id, newFollowers);
+  //       setCardFollowers(res.followers);
+  //     };
+  //     updateFollowers();
+  //   }, [id, following, followers]);
+
+  //   const handleClick = following => {
+  //     setFollowing(!following);
+  //     if (following) {
+  //       const newFollowers = followers - 1;
+  //       setCardFollowers(newFollowers);
+  //       //   updateUserFollowers(id, newFollowers).then(res => {
+  //       //     setCardFollowers(res.followers);
+  //       //   });
+  //     }
+  //     if (!following) {
+  //       const newFollowers = followers + 1;
+  //       setCardFollowers(newFollowers);
+  //       //   updateUserFollowers(id, newFollowers).then(res => {
+  //       //     setCardFollowers(res.followers);
+  //       //   });
+  //     }
+
+  //   localStorage.setItem(`card${id}`, JSON.stringify(!following));
+  //   };
   const handleClick = following => {
     if (following) {
-      const newFollowers = followers - 1;
+      const newFollowers = cardFollowers - 1;
+      setCardFollowers(newFollowers);
       updateUserFollowers(id, newFollowers).then(res => {
         setCardFollowers(res.followers);
       });
     }
     if (!following) {
-      const newFollowers = followers + 1;
+      const newFollowers = cardFollowers + 1;
+      setCardFollowers(newFollowers);
       updateUserFollowers(id, newFollowers).then(res => {
         setCardFollowers(res.followers);
       });
