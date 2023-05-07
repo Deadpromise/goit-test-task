@@ -1,0 +1,59 @@
+import { useEffect, useState } from 'react';
+import Ellipse from '../../images/Ellipse1.png';
+import Logo from '../../images/Logo.png';
+import SpeachBuble from '../../images/picture2.png';
+import Line from '../../images/Rectangle1.png';
+import { FollowButton } from './UserCard.styled';
+import { updateUserFollowers } from 'utils/api';
+
+export const UserCard = ({ id, tweets, followers, avatar }) => {
+  const [following, setFollowing] = useState(false);
+  const [cardFollowers, setCardFollowers] = useState(followers);
+
+  useEffect(() => {
+    const localFollowing = localStorage.getItem(`card${id}`);
+    if (localFollowing) {
+      setFollowing(JSON.parse(localFollowing));
+    }
+  }, [id]);
+
+  const handleClick = following => {
+    if (following) {
+      //   setCardFollowers(prevState => prevState - 1);
+      const newFollowers = followers - 1;
+      updateUserFollowers(id, newFollowers).then(
+        setCardFollowers(newFollowers)
+      );
+    }
+    if (!following) {
+      //   setCardFollowers(prevState => prevState + 1);
+      const newFollowers = followers + 1;
+      updateUserFollowers(id, newFollowers).then(
+        setCardFollowers(newFollowers)
+      );
+    }
+    setFollowing(!following);
+    localStorage.setItem(`card${id}`, JSON.stringify(!following));
+  };
+
+  return (
+    <div style={{ backgroundColor: 'gray' }}>
+      <img src={Ellipse} alt="ellipse" />
+      <img src={avatar} alt="avatar" />
+      <img src={Logo} alt="logo" />
+      <img src={SpeachBuble} alt="speach-buble" />
+      <img src={Line} alt="line" />
+      <p>{tweets} TWEETS</p>
+      <p>{cardFollowers} FOLLOWERS</p>
+      <FollowButton
+        backgroundColor={following ? 'red' : 'green'}
+        type="button"
+        onClick={() => {
+          handleClick(following);
+        }}
+      >
+        {following ? 'FOLLOWING' : 'FOLLOW'}
+      </FollowButton>
+    </div>
+  );
+};
