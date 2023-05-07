@@ -1,7 +1,6 @@
 import { UserCard } from 'components/UserCard/UserCard';
 
 export const CardsGallery = ({ results }) => {
-  console.log(results);
   return (
     <>
       <ul>

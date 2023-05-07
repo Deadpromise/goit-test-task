@@ -19,18 +19,16 @@ export const UserCard = ({ id, tweets, followers, avatar }) => {
 
   const handleClick = following => {
     if (following) {
-      //   setCardFollowers(prevState => prevState - 1);
       const newFollowers = followers - 1;
-      updateUserFollowers(id, newFollowers).then(
-        setCardFollowers(newFollowers)
-      );
+      updateUserFollowers(id, newFollowers).then(res => {
+        setCardFollowers(res.followers);
+      });
     }
     if (!following) {
-      //   setCardFollowers(prevState => prevState + 1);
       const newFollowers = followers + 1;
-      updateUserFollowers(id, newFollowers).then(
-        setCardFollowers(newFollowers)
-      );
+      updateUserFollowers(id, newFollowers).then(res => {
+        setCardFollowers(res.followers);
+      });
     }
     setFollowing(!following);
     localStorage.setItem(`card${id}`, JSON.stringify(!following));
@@ -44,7 +42,7 @@ export const UserCard = ({ id, tweets, followers, avatar }) => {
       <img src={SpeachBuble} alt="speach-buble" />
       <img src={Line} alt="line" />
       <p>{tweets} TWEETS</p>
-      <p>{cardFollowers} FOLLOWERS</p>
+      <p>{cardFollowers.toLocaleString('en-US')} FOLLOWERS</p>
       <FollowButton
         backgroundColor={following ? 'red' : 'green'}
         type="button"
